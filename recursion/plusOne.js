@@ -52,7 +52,37 @@ const plusOne = (array) => {
     }
   }
 
-  return rec(array, array.length)
+  // before running, check
+  // - argument is Array<numbers>
+  //    contains only numbers & not NaN
+  // - argument !== []
+  // - all items are digits [0 - 9]
+
+  try {
+    if (!Array.isArray(array)) {
+      throw new Error(`given argument is of type: '${typeof(array)}'`)
+    }
+  
+    if (array.length === 0) {
+      throw new Error('array is empty')
+    }
+  
+    array.forEach((value,index) => {
+      if (typeof(value) !== 'number') {
+        throw new Error(`ARRAY[${index}] is of type: '${typeof(value)}'`)
+      }
+      if (isNaN(value)) {
+        throw new Error(`ARRAY[${index}] is NaN`)
+      }
+      if (value < 0 || value > 9) {
+        throw new Error(`ARRAY[${index}] is not between 0 & 9`)
+      }
+    })
+
+    return rec(array, array.length)
+  } catch(ex) {
+    console.log(`ERROR: ${ex.message}`)
+  }
 }
 
 module.exports = plusOne

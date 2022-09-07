@@ -55,4 +55,4 @@ const plusOne = (array) => {
   return rec(array, array.length)
 }
 
-module.exports = {plusOne}
+module.exports = plusOne
